@@ -41,30 +41,52 @@ namespace EpoMaker
             InitializeComponent();
             Console.WriteLine(MainGrid.RowDefinitions.Count);
         }
-        private void CreateCourseBTN()
+        private void UpdateCourseBTNs()
         {
             int coursCount = courses.Count;
-            int rows =(int) Math.Round(Math.Sqrt(coursCount),0);
-            int cols = (int)Math.Ceiling(Math.Sqrt(coursCount));
-            for (int i = 0; i < cols-(MainGrid.ColumnDefinitions.Count-2); i++)
+            int rowsCountNew =(int) Math.Round(Math.Sqrt(coursCount),0);
+            int columnsCountNew = (int)Math.Ceiling(Math.Sqrt(coursCount));
+            int rowsCountOld = MainGrid.RowDefinitions.Count - 2;
+            int columnsCountOld = MainGrid.ColumnDefinitions.Count - 2;
+            if (columnsCountNew - columnsCountOld > 0)
             {
-                MainGrid.ColumnDefinitions.Insert(1, new ColumnDefinition
+                for (int i = 0; i < columnsCountNew - columnsCountOld; i++)
                 {
-                    Width = new GridLength(1, GridUnitType.Star)
-                });
+                    MainGrid.ColumnDefinitions.Insert(1, new ColumnDefinition
+                    {
+                        Width = new GridLength(1, GridUnitType.Star)
+                    });
+                }
             }
-            for (int i = 0; i < rows-(MainGrid.RowDefinitions.Count-3); i++)
+            else if (columnsCountNew - columnsCountOld < 0)
             {
-                MainGrid.RowDefinitions.Insert(2, new RowDefinition
+                for (int i = 0; i <= columnsCountOld - columnsCountNew; i++)
                 {
-                    Height = new GridLength(1, GridUnitType.Star)
-                });
+                    //MainGrid.ColumnDefinitions.RemoveAt(1);
+                }
             }
-            int pos = -2;
-            for (int i = 0; i < rows; i++)
+            if (rowsCountNew - rowsCountOld>0)
             {
-                pos++;
-                for (int j = 0; j < cols; j++)
+                for (int i = 0; i < rowsCountNew - rowsCountOld; i++)
+                {
+                    MainGrid.RowDefinitions.Insert(2, new RowDefinition
+                    {
+                        Height = new GridLength(1, GridUnitType.Star)
+                    });
+                    MainGrid.Children.Remove(new CourseBTN());
+                }
+            }
+            else if (rowsCountNew - rowsCountOld < 0)
+            {
+                for (int i = 0; i < rowsCountOld - rowsCountNew; i++)
+                {
+                    MainGrid.RowDefinitions.RemoveAt(2);
+                }
+            }
+            int pos = -1;
+            for (int i = 0; i < rowsCountNew; i++)
+            {
+                for (int j = 0; j < columnsCountNew; j++)
                 {
                     pos++;
                     if (pos < courses.Count) { 
@@ -84,6 +106,32 @@ namespace EpoMaker
             }
         }
 
-
+        private void RemoveFromGrid(Grid grid,int minRow,int minCol,int maxRow,int maxCol)
+        {
+            List<UIElement> toDelete = new List<UIElement>();
+            foreach (UIElement o in grid.Children)
+            {
+                bool isInRowRange = Grid.GetRow(o) >= minRow && Grid.GetRow(o) <= maxRow;
+                bool isInColRange = Grid.GetColumn(o) >= minCol && Grid.GetColumn(o) <= maxCol;
+                if (isInColRange&&isInRowRange)
+                {
+                    toDelete.Add(o);                    
+                }
+            }
+            foreach (UIElement uIElement in toDelete)
+            {
+                grid.Children.Remove(uIElement);
+            }
+            try
+            {
+                grid.RowDefinitions.RemoveRange(minRow, maxRow - minRow);
+                grid.ColumnDefinitions.RemoveRange(minCol, maxCol - minCol);
+            }
+            catch (ArgumentOutOfRangeException) { }
+        }
+        private void ResetInnerGrid(Grid grid)
+        {
+            RemoveFromGrid(grid, 2, 2, grid.RowDefinitions.Count, grid.ColumnDefinitions.Count);
+        }
     }
 }

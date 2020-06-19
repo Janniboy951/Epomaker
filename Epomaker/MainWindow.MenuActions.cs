@@ -14,6 +14,7 @@ namespace EpoMaker
     {
         private void MENU_New_Click(object sender, RoutedEventArgs e)
         {
+            MENU_Close_Click(null, null);
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "Epomaker Datei (*.epmf)|*.epmf",
@@ -29,20 +30,28 @@ namespace EpoMaker
                 };
                 _command.ExecuteNonQuery();
                 _fileLoaded = true;
-                CreateCourseBTN();
+                UpdateCourseBTNs();
             }
         }
 
         private void MENU_Close_Click(object sender, RoutedEventArgs e)
         {
-            _command.Connection.Close();
+            try
+            {
+                _command.Connection.Close();
+            }
+            catch (NullReferenceException)
+            {
+                
+            }
             courses.Clear();
-            CreateCourseBTN();
+            ResetInnerGrid(MainGrid);
             _fileLoaded = false;
         }
 
         private void MENU_Open_Click(object sender, RoutedEventArgs e)
         {
+            MENU_Close_Click(null, null);
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Epomaker Datei (*.epmf)|*.epmf",
@@ -55,7 +64,7 @@ namespace EpoMaker
                 sqLiteConnection.Open();
                 _command = new SQLiteCommand(sqLiteConnection);
                 _fileLoaded = true;
-                CreateCourseBTN();
+                UpdateCourseBTNs();
             }
         }
 
@@ -79,7 +88,7 @@ namespace EpoMaker
                     _command.CommandText = @"Insert INTO TableList (Name) Values ('"+newCoursName+"')";
                     _command.ExecuteNonQuery();
                     courses.Add(newCoursName);
-                    CreateCourseBTN();
+                    UpdateCourseBTNs();
                 }
                 else
                 {
@@ -88,5 +97,6 @@ namespace EpoMaker
                 }
             }
         }
+        
     }
 }
