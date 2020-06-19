@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="EpoMaker.CourseBTN"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp1"
+             mc:Ignorable="d" 
+             d:DesignHeight="45" d:DesignWidth="80">
+    <Grid>
+        <Button x:Name="BTNCourse" Margin="10">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="_Benutzer bearbeiten" x:Name="CourseBTN_MENU_EDIT" Click="CourseBTN_MENU_EDIT_Click"/>
+                    <MenuItem Header="_Umbenennen"/>
+                    <MenuItem Header="_Löschen"/>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+    </Grid>
+</UserControl>
