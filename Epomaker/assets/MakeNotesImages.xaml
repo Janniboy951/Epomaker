@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:EpoMaker.assets">
+    <StackPanel x:Key="missing" Orientation="Vertical">
+        <Image Source="questionmark.png"/>
+        <Label Content="Nicht anwesend" HorizontalAlignment="Center"/>
+    </StackPanel>
+    <StackPanel x:Key="veryBad" Orientation="Vertical">
+        <Image Source="veryangrySmiley.png"/>
+        <Label Content="Sehr schlecht" HorizontalAlignment="Center"/>
+    </StackPanel>
+    <StackPanel x:Key="bad" Orientation="Vertical">
+        <Image Source="angrySmiley.png"/>
+        <Label Content="Schlecht" HorizontalAlignment="Center"/>
+    </StackPanel>
+    <StackPanel x:Key="neutral" Orientation="Vertical">
+        <Image Source="neutralSmiley.png"/>
+        <Label Content="Okay" HorizontalAlignment="Center"/>
+    </StackPanel>
+    <StackPanel x:Key="good" Orientation="Vertical">
+        <Image Source="happySmiley.png"/>
+        <Label Content="Gut" HorizontalAlignment="Center"/>
+    </StackPanel>
+    <StackPanel x:Key="veryGood" Orientation="Vertical">
+        <Image Source="veryhappySmiley.png"/>
+        <Label Content="Sehr gut" HorizontalAlignment="Center"/>
+    </StackPanel>
+    
+    
+    
+    
+    
+</ResourceDictionary>

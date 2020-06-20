@@ -14,6 +14,7 @@ namespace EpoMaker
     public partial class MainWindow : Window
     {
         public SQLiteCommand _command;
+        public SQLiteConnection _connection;
         public List<string> courses = new List<string>();
         bool _fileLoaded
         {
@@ -48,41 +49,24 @@ namespace EpoMaker
             int columnsCountNew = (int)Math.Ceiling(Math.Sqrt(coursCount));
             int rowsCountOld = MainGrid.RowDefinitions.Count - 2;
             int columnsCountOld = MainGrid.ColumnDefinitions.Count - 2;
-            if (columnsCountNew - columnsCountOld > 0)
+
+            for (int i = 0; i < columnsCountNew - columnsCountOld; i++)
             {
-                for (int i = 0; i < columnsCountNew - columnsCountOld; i++)
+                MainGrid.ColumnDefinitions.Insert(1, new ColumnDefinition
                 {
-                    MainGrid.ColumnDefinitions.Insert(1, new ColumnDefinition
-                    {
-                        Width = new GridLength(1, GridUnitType.Star)
-                    });
-                }
+                    Width = new GridLength(1, GridUnitType.Star)
+                });
             }
-            else if (columnsCountNew - columnsCountOld < 0)
+
+            for (int i = 0; i < rowsCountNew - rowsCountOld; i++)
             {
-                for (int i = 0; i <= columnsCountOld - columnsCountNew; i++)
+                MainGrid.RowDefinitions.Insert(2, new RowDefinition
                 {
-                    //MainGrid.ColumnDefinitions.RemoveAt(1);
-                }
+                    Height = new GridLength(1, GridUnitType.Star)
+                });
+                    
             }
-            if (rowsCountNew - rowsCountOld>0)
-            {
-                for (int i = 0; i < rowsCountNew - rowsCountOld; i++)
-                {
-                    MainGrid.RowDefinitions.Insert(2, new RowDefinition
-                    {
-                        Height = new GridLength(1, GridUnitType.Star)
-                    });
-                    MainGrid.Children.Remove(new CourseBTN());
-                }
-            }
-            else if (rowsCountNew - rowsCountOld < 0)
-            {
-                for (int i = 0; i < rowsCountOld - rowsCountNew; i++)
-                {
-                    MainGrid.RowDefinitions.RemoveAt(2);
-                }
-            }
+
             int pos = -1;
             for (int i = 0; i < rowsCountNew; i++)
             {
@@ -131,7 +115,23 @@ namespace EpoMaker
         }
         private void ResetInnerGrid(Grid grid)
         {
-            RemoveFromGrid(grid, 2, 2, grid.RowDefinitions.Count, grid.ColumnDefinitions.Count);
+            RemoveFromGrid(grid, 2, 1, grid.RowDefinitions.Count, grid.ColumnDefinitions.Count-1);
+            MainGrid.ColumnDefinitions.Insert(1, new ColumnDefinition
+            {
+                Width = new GridLength(1, GridUnitType.Star)
+            });
+        }
+        public void OpenCourse(string course)
+        {
+            ResetInnerGrid(MainGrid);
+            MainGrid.RowDefinitions.Add(new RowDefinition
+            {
+                Height = new GridLength(1, GridUnitType.Star)
+            });
+            MakeNotes makeNotesUC = new MakeNotes(course);
+            MainGrid.Children.Add(makeNotesUC);
+            Grid.SetColumn(makeNotesUC, 1);
+            Grid.SetRow(makeNotesUC, 2);
         }
     }
 }

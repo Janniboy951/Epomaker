@@ -5,11 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="EditUsers" Height="450" Width="800">
+        Title="EditUsers" Height="800" Width="600">
+    <Window.Resources>
+        <CollectionViewSource x:Key="ItemCollectionViewSource"  CollectionViewType="ListCollectionView"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-
+        <DataGrid CanUserSortColumns="True" MaxWidth="450" GridLinesVisibility="Vertical" DataContext="{StaticResource ItemCollectionViewSource}" ItemsSource="{Binding}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn CanUserSort="True" Width="1*" Header="_ID" Binding="{Binding ID}"></DataGridTextColumn>
+                <DataGridTextColumn CanUserSort="True" Width="6*" Header="_Vorname" Binding="{Binding PreName}"></DataGridTextColumn>
+                <DataGridTextColumn CanUserSort="True" Width="8*" Header="_Nachname" Binding="{Binding LastName}"></DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell" >
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="SeaGreen"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+        <StackPanel Grid.Column="1" Margin="0 20 0 0">
+            <Button Content="Speichern" Margin="10" Click="BTNSave_Click"/>
+            <Button Content="Verwerfen" Margin="10" Click="BTNDiscard_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

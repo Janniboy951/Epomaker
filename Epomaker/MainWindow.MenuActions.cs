@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,12 +25,14 @@ namespace EpoMaker
             {
                 SQLiteConnection sqLiteConnection = new SQLiteConnection("Data Source=" + saveFileDialog.FileName + "; New = True; Compress = True; ");
                 sqLiteConnection.Open();
+                _connection = sqLiteConnection;
                 _command = new SQLiteCommand(sqLiteConnection)
                 {
                     CommandText = @"CREATE TABLE 'TableList' ('Name'TEXT);"
                 };
                 _command.ExecuteNonQuery();
                 _fileLoaded = true;
+                this.Title = "Eponoten Maker - "+Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
                 UpdateCourseBTNs();
             }
         }
@@ -47,6 +50,7 @@ namespace EpoMaker
             courses.Clear();
             ResetInnerGrid(MainGrid);
             _fileLoaded = false;
+            this.Title = "Eponoten Maker";
         }
 
         private void MENU_Open_Click(object sender, RoutedEventArgs e)
@@ -63,7 +67,9 @@ namespace EpoMaker
                 
                 sqLiteConnection.Open();
                 _command = new SQLiteCommand(sqLiteConnection);
+                _connection = sqLiteConnection;
                 _fileLoaded = true;
+                this.Title = "Eponoten Maker - " + Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 UpdateCourseBTNs();
             }
         }
