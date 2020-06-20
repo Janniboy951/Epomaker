@@ -63,8 +63,10 @@ namespace EpoMaker
                 if (!((MainWindow)Application.Current.MainWindow).courses.Contains(((TextBox)sender).Text))
                 {
                     BTNCourse.Content = ((TextBox)sender).Text;
-                    SQLiteCommand sqlCommand = new SQLiteCommand(((MainWindow)Application.Current.MainWindow)._connection);
-                    sqlCommand.CommandText = @"ALTER TABLE '" + oldTableName + "' RENAME TO '" + ((TextBox)sender).Text + "'";
+                    SQLiteCommand sqlCommand = new SQLiteCommand(((MainWindow)Application.Current.MainWindow)._connection)
+                    {
+                        CommandText = @"ALTER TABLE '" + oldTableName + "' RENAME TO '" + ((TextBox)sender).Text + "'"
+                    };
                     sqlCommand.ExecuteNonQuery();
                     sqlCommand.CommandText = "UPDATE TableList SET Name = '" + ((TextBox)sender).Text + "' WHERE Name = '" + oldTableName + "' ";
                     sqlCommand.ExecuteNonQuery();

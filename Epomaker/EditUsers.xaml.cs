@@ -21,9 +21,9 @@ namespace EpoMaker
     /// </summary>
     public partial class EditUsers : Window
     {
-        private SQLiteCommand sqlite;
-        private string course;
-        private List<Person> personList = new List<Person>();
+        private readonly SQLiteCommand sqlite;
+        private readonly string course;
+        private readonly List<Person> personList = new List<Person>();
         public EditUsers(string course)
         {
             this.course = course;

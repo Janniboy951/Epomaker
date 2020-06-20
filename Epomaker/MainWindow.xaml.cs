@@ -16,12 +16,12 @@ namespace EpoMaker
         public SQLiteCommand _command;
         public SQLiteConnection _connection;
         public List<string> courses = new List<string>();
-        bool _fileLoaded
+        bool FileLoaded
         {
-            get { return fileLoaded; }
+            get { return _fileLoaded; }
             set
             {
-                fileLoaded = value;
+                _fileLoaded = value;
                 MENU_Course.IsEnabled = value;
                 MENU_Close.IsEnabled = value;
                 MENU_Save.IsEnabled = value;
@@ -36,7 +36,7 @@ namespace EpoMaker
                 }
             }
         }
-        private bool fileLoaded = false;
+        private bool _fileLoaded = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -128,10 +128,27 @@ namespace EpoMaker
             {
                 Height = new GridLength(1, GridUnitType.Star)
             });
-            MakeNotes makeNotesUC = new MakeNotes(course);
-            MainGrid.Children.Add(makeNotesUC);
-            Grid.SetColumn(makeNotesUC, 1);
-            Grid.SetRow(makeNotesUC, 2);
+            MakeNotes makeNotesUC = new MakeNotes(_connection,course);
+            if (makeNotesUC.successfullyLoaded)
+            {
+                MainGrid.Children.Add(makeNotesUC);
+                Grid.SetColumn(makeNotesUC, 1);
+                Grid.SetRow(makeNotesUC, 2);
+            }
+            else
+            {
+                LoadCourseList();
+            }
+        }
+
+        public void LoadCourseList()
+        {
+            ResetInnerGrid(MainGrid);
+            MainGrid.RowDefinitions.Add(new RowDefinition
+            {
+                Height = new GridLength(1, GridUnitType.Star)
+            });
+            UpdateCourseBTNs();
         }
     }
 }

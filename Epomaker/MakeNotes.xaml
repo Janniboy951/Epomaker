@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EpoMaker"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="800">
+             d:DesignHeight="300" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,18 +15,48 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="BTNMissing" Margin="5 30" Content="{DynamicResource missing}" Background="Transparent" MaxHeight="140"/>
-        <Button x:Name="BTNVeryBad" Margin="5 30" Content="{DynamicResource veryBad}" Grid.Column="1" Background="Transparent" MaxHeight="140"/>
-        <Button x:Name="BTNBad" Margin="5 30" Content="{DynamicResource bad}" Grid.Column="2" Background="Transparent" MaxHeight="140"/>
-        <Button x:Name="BTNNeutral" Margin="5 30" Content="{DynamicResource neutral}" Grid.Column="3" Background="Transparent" MaxHeight="140"/>
-        <Button x:Name="BTNGood" Margin="5 30" Content="{DynamicResource good}" Grid.Column="4" Background="Transparent" MaxHeight="140"/>
-        <Button x:Name="BTNVeryGood" Margin="5 30" Content="{DynamicResource veryGood}" Grid.Column="5" Background="Transparent" MaxHeight="140"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+        <!--#region Inner Grid-->
+        <Grid Grid.Row="1" x:Name="noteSelectGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Slider Grid.Column="1" Margin="-5 5" Grid.ColumnSpan="5" x:Name="NoteSlider" Maximum="15" Minimum="1" Foreground="Black"
+                    Value="8" TickPlacement="BottomRight" TickFrequency="3.5" IsDirectionReversed="True" LargeChange="3.5" SmallChange="1.75"/>
+            <ContentControl Width="100" Margin="5 40 0 0" Grid.Column="5" Content="{DynamicResource veryBad}" Grid.ColumnSpan="2"/>
+            <ContentControl Width="100" Margin="5 40 0 0" Grid.Column="4" Content="{DynamicResource bad}"/>
+            <ContentControl Width="100" Margin="5 40 0 0" Grid.Column="3" Content="{DynamicResource neutral}"/>
+            <ContentControl Width="100" Margin="5 40 0 0" Grid.Column="2" Content="{DynamicResource good}"/>
+            <ContentControl Width="100" Margin="5 40 0 0" Grid.Column="0" Content="{DynamicResource veryGood}" Grid.ColumnSpan="2"/>
+            <Border Grid.ColumnSpan="7" Background="White" Opacity="0.7" BorderThickness="0" Visibility="Hidden" x:Name="hideBorder"/>
+        </Grid>
+        <!--#endregion-->
+        <Label x:Name="NameField" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="40" FontWeight="UltraBlack"/>
+        <ToggleButton x:Name="BTNMissing" IsChecked="False" Margin="0 37  0 0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Content="{DynamicResource missing}" Background="Transparent" Height="128" Click="ToggleButton_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="12 0 0 0">
+            <DatePicker x:Name="DatePickBox" VerticalAlignment="Center" FirstDayOfWeek="Monday"/>
+            <StackPanel Margin="10 0">
+                <RadioButton x:Name="SingleHour" Content="Einzelstunde" IsChecked="{Binding Path=!IsDoublehour}" VerticalAlignment="Center" Margin="0 2"/>
+                <RadioButton x:Name="DoubleHour" Content="Doppelstunde" IsChecked="{Binding Path=IsDoublehour}" VerticalAlignment="Center" Margin="0 2"/>
+            </StackPanel>
+            <Button Margin="20,3,10,3" Width="140" Content="Abbrechen" x:Name="BTNCancel" Click="BTNCancel_Click"/>
+            <Button Margin="10,3" Width="140" Content="Überspringen" x:Name="BTNSKip" Click="BTNSKip_Click"/>
+            <Button Margin="10,3,0,3" Width="140" Content="Speichern und Weiter" x:Name="BTNSaveNext" Click="BTNSaveNext_Click"/>
+            
+        </StackPanel>
     </Grid>
 </UserControl>

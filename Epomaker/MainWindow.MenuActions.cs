@@ -28,10 +28,10 @@ namespace EpoMaker
                 _connection = sqLiteConnection;
                 _command = new SQLiteCommand(sqLiteConnection)
                 {
-                    CommandText = @"CREATE TABLE 'TableList' ('Name'TEXT);"
+                    CommandText = @"CREATE TABLE 'TableList' ('Name'TEXT,'CurrentPos'INTEGER,PRIMARY KEY('Name'));"
                 };
                 _command.ExecuteNonQuery();
-                _fileLoaded = true;
+                FileLoaded = true;
                 this.Title = "Eponoten Maker - "+Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
                 UpdateCourseBTNs();
             }
@@ -49,7 +49,7 @@ namespace EpoMaker
             }
             courses.Clear();
             ResetInnerGrid(MainGrid);
-            _fileLoaded = false;
+            FileLoaded = false;
             this.Title = "Eponoten Maker";
         }
 
@@ -68,7 +68,7 @@ namespace EpoMaker
                 sqLiteConnection.Open();
                 _command = new SQLiteCommand(sqLiteConnection);
                 _connection = sqLiteConnection;
-                _fileLoaded = true;
+                FileLoaded = true;
                 this.Title = "Eponoten Maker - " + Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 UpdateCourseBTNs();
             }
@@ -92,6 +92,8 @@ namespace EpoMaker
                     _command.CommandText = @"CREATE TABLE '" + newCoursName + @"' ('schuelerID'INTEGER,'Vorname'TEXT,'Nachname'TEXT,PRIMARY KEY('schuelerID'))";
                     _command.ExecuteNonQuery();
                     _command.CommandText = @"Insert INTO TableList (Name) Values ('"+newCoursName+"')";
+                    _command.ExecuteNonQuery();
+                    _command.CommandText = @"CREATE TABLE '"+newCoursName+"-Data' ('schelerId'	INTEGER,'Note'	REAL,'Stunde'	date,'Fehlt'	BOOLEAN,'Doppelstunde'	BOOLEAN,FOREIGN KEY('schelerId') REFERENCES '5a'('schuelerID'));";
                     _command.ExecuteNonQuery();
                     courses.Add(newCoursName);
                     UpdateCourseBTNs();
