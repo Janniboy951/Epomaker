@@ -129,6 +129,8 @@ namespace EpoMaker
                 headerRow.Add(reader.GetString(0));
             }
             reader.Close();
+            headerRow.Add("");
+            headerRow.Add(langDE.TABLE_Cellheader_Average);
             arrayList.Add(headerRow.ToArray());
 
             _command.CommandText = string.Format(SQL_Statements.Get_Course_Persons, openedCourse);
@@ -157,14 +159,22 @@ namespace EpoMaker
                     notes.Add(Math.Round(reader.GetDouble(1),1).ToString().Replace(",", "."));
                 }
                 reader.Close();
-                for (int i = 0; i < (headerRow.Count+2)-notes.Count; i++)
+                int lengthDiff = (headerRow.Count - 1) - notes.Count;
+                for (int i = 0; i < lengthDiff; i++)
                 {
                     notes.Add("");
                 }
                 _command.CommandText = string.Format(SQL_Statements.Get_Single_Student_Grade_Average, openedCourse, person.ID);
                 reader = _command.ExecuteReader();
                 reader.Read();
-                notes.Add(Math.Round(reader.GetDouble(0), 1).ToString().Replace(",", "."));
+                if (!reader.IsDBNull(0))
+                {
+                    notes.Add(Math.Round(reader.GetDouble(0), 1).ToString().Replace(",", "."));
+                }
+                else
+                {
+                    notes.Add("");
+                }
                 reader.Close();
                 arrayList.Add(notes.ToArray());
             }

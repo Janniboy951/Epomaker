@@ -304,6 +304,15 @@ namespace EpoMaker.resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Durchschnitt ähnelt.
+        /// </summary>
+        public static string TABLE_Cellheader_Average {
+            get {
+                return ResourceManager.GetString("TABLE_Cellheader_Average", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Vorname ähnelt.
         /// </summary>
         public static string TABLE_Cellheader_Forename {

@@ -54,10 +54,13 @@ namespace EpoMaker
         {
             sqlite.CommandText = string.Format(SQL_Statements.Clear_CourseMembers,course);
             sqlite.ExecuteNonQuery();
+            int id = 0;
             foreach (Person person in personList)
             {
-                sqlite.CommandText = string.Format(SQL_Statements.Insert_Users_To_Course, course, person.PreName, person.LastName);
+
+                sqlite.CommandText = string.Format(SQL_Statements.Insert_Users_To_Course, course,id, person.PreName, person.LastName);
                 sqlite.ExecuteNonQuery();
+                id++;
             }
             this.Close();
 

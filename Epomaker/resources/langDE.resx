@@ -199,6 +199,9 @@
   <data name="SETGRADE_Slide_Option_VeryGood" xml:space="preserve">
     <value>Sehr gut</value>
   </data>
+  <data name="TABLE_Cellheader_Average" xml:space="preserve">
+    <value>Durchschnitt</value>
+  </data>
   <data name="TABLE_Cellheader_Forename" xml:space="preserve">
     <value>Vorname</value>
   </data>

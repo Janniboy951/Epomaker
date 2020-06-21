@@ -27,7 +27,10 @@ namespace EpoMaker
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 Filter = langDE.FILEDIALOG_FileTypeName_ExcelFile+" (*.xlsx)|*.xlsx"
             };
-            excelFile.ShowDialog();
+            if (excelFile.ShowDialog()!=true)
+            {
+                return;
+            }
             this.spreadsheetDocument = SpreadsheetDocument.Create(excelFile.FileName, SpreadsheetDocumentType.Workbook);
             WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
             workbookpart.Workbook = new Workbook();

@@ -79,7 +79,7 @@ namespace EpoMaker.resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die CREATE TABLE &apos;{0}&apos; (&apos;schuelerID&apos;INTEGER,&apos;Vorname&apos;TEXT,&apos;Nachname&apos;TEXT,PRIMARY KEY(&apos;schuelerID&apos;,&apos;schuelerID&apos; AUTOINCREMENT); ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die CREATE TABLE &apos;{0}&apos; (&apos;schuelerID&apos;INTEGER,&apos;Vorname&apos;TEXT,&apos;Nachname&apos;TEXT,PRIMARY KEY(&apos;schuelerId&apos; AUTOINCREMENT)); ähnelt.
         /// </summary>
         internal static string Create_Course_Table {
             get {
@@ -160,7 +160,7 @@ namespace EpoMaker.resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die INSERT INTO &apos;{0}&apos;(Vorname,Nachname) VALUES ({1},&apos;{2}&apos;); ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die INSERT INTO &apos;{0}&apos;(schuelerID,Vorname,Nachname) VALUES ({1},&apos;{2}&apos;,&apos;{3}&apos;); ähnelt.
         /// </summary>
         internal static string Insert_Users_To_Course {
             get {
@@ -169,9 +169,9 @@ namespace EpoMaker.resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ALTER TABLE &apos;{0}&apos; RENAME TO &apos;&apos;{1}&apos;; 
-        ///ALTER TABLE &apos;&apos;{0}-Data&apos; RENAME TO &apos;&apos;{1}-Data&apos;; 
-        ///UPDATE TableList SET Name=&apos;&apos;{1}&apos; WHERE Name=&apos;&apos;{0}&apos;; ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die ALTER TABLE &apos;{0}&apos; RENAME TO &apos;{1}&apos;; 
+        ///ALTER TABLE &apos;{0}-Data&apos; RENAME TO &apos;{1}-Data&apos;; 
+        ///UPDATE TableList SET Name=&apos;{1}&apos; WHERE Name=&apos;{0}&apos;; ähnelt.
         /// </summary>
         internal static string Rename_Course {
             get {
