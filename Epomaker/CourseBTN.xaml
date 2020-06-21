@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfApp1"
+             xmlns:resx="clr-namespace:EpoMaker.resources"
              mc:Ignorable="d" 
              d:DesignHeight="45" d:DesignWidth="80">
     <Grid>
         <Button x:Name="BTNCourse" Margin="10" Click="BTNCourse_Click">
             <Button.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="_Benutzer bearbeiten" x:Name="CourseBTN_MENU_EDIT" Click="CourseBTN_MENU_EDIT_Click"/>
-                    <MenuItem Header="_Umbenennen" x:Name="CourseBTN_MENU_RENAME" Click="CourseBTN_MENU_RENAME_Click"/>
-                    <MenuItem Header="_Löschen" x:Name="CourseBTN_MENU_DELETE" Click="CourseBTN_MENU_DELETE_Click"/>
+                    <MenuItem Header="{x:Static resx:langDE.MENU_EditUsers}" x:Name="CourseBTN_MENU_EDIT" Click="CourseBTN_MENU_EDIT_Click"/>
+                    <MenuItem Header="{x:Static resx:langDE.MENU_Rename}" x:Name="CourseBTN_MENU_RENAME" Click="CourseBTN_MENU_RENAME_Click"/>
+                    <MenuItem Header="{x:Static resx:langDE.MENU_Delete}" x:Name="CourseBTN_MENU_DELETE" Click="CourseBTN_MENU_DELETE_Click"/>
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>

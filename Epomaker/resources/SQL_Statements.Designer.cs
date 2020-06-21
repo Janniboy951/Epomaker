@@ -79,7 +79,7 @@ namespace EpoMaker.resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die CREATE TABLE &apos;{0}&apos; (&apos;schuelerID&apos;INTEGER,&apos;Vorname&apos;TEXT,&apos;Nachname&apos;TEXT,PRIMARY KEY(&apos;schuelerID&apos;)); ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die CREATE TABLE &apos;{0}&apos; (&apos;schuelerID&apos;INTEGER,&apos;Vorname&apos;TEXT,&apos;Nachname&apos;TEXT,PRIMARY KEY(&apos;schuelerID&apos;,&apos;schuelerID&apos; AUTOINCREMENT); ähnelt.
         /// </summary>
         internal static string Create_Course_Table {
             get {
@@ -160,7 +160,7 @@ namespace EpoMaker.resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die INSERT INTO &apos;{0}&apos;(schuelerID,Vorname,Nachname) VALUES ({1},&apos;{2}&apos;,&apos;{3}&apos;); ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die INSERT INTO &apos;{0}&apos;(Vorname,Nachname) VALUES ({1},&apos;{2}&apos;); ähnelt.
         /// </summary>
         internal static string Insert_Users_To_Course {
             get {

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:EpoMaker"
+             xmlns:resx="clr-namespace:EpoMaker.resources"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800">
     <UserControl.Resources>
@@ -50,12 +50,12 @@
         <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="12 0 0 0">
             <DatePicker x:Name="DatePickBox" VerticalAlignment="Center" FirstDayOfWeek="Monday"/>
             <StackPanel Margin="10 0">
-                <RadioButton x:Name="SingleHour" Content="Einzelstunde" IsChecked="{Binding Path=!IsDoublehour}" VerticalAlignment="Center" Margin="0 2"/>
-                <RadioButton x:Name="DoubleHour" Content="Doppelstunde" IsChecked="{Binding Path=IsDoublehour}" VerticalAlignment="Center" Margin="0 2"/>
+                <RadioButton x:Name="SingleHour" Content="{x:Static resx:langDE.SETGRADE_Option_SingleLesson}" IsChecked="{Binding Path=!IsDoublehour}" VerticalAlignment="Center" Margin="0 2"/>
+                <RadioButton x:Name="DoubleHour" Content="{x:Static resx:langDE.SETGRADE_Option_DoubleLesson}" IsChecked="{Binding Path=IsDoublehour}" VerticalAlignment="Center" Margin="0 2"/>
             </StackPanel>
-            <Button Margin="20,3,10,3" Width="140" Content="Zurück" x:Name="BTNCancel" Click="BTNCancel_Click"/>
-            <Button Margin="10,3" Width="140" Content="Überspringen" x:Name="BTNSKip" Click="BTNSKip_Click"/>
-            <Button Margin="10,3,0,3" Width="140" Content="Speichern und Weiter" x:Name="BTNSaveNext" Click="BTNSaveNext_Click"/>
+            <Button Margin="20,3,10,3" Width="140" Content="{x:Static resx:langDE.SETGRADE_Button_Cancel}" x:Name="BTNCancel" Click="BTNCancel_Click"/>
+            <Button Margin="10,3" Width="140" Content="{x:Static resx:langDE.SETGRADE_Button_Skip}" x:Name="BTNSKip" Click="BTNSKip_Click"/>
+            <Button Margin="10,3,0,3" Width="140" Content="{x:Static resx:langDE.SETGRADE_Button_SaveNext}" x:Name="BTNSaveNext" Click="BTNSaveNext_Click"/>
             
         </StackPanel>
     </Grid>

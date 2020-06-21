@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using EpoMaker.resources;
 using Microsoft.Win32;
 
 namespace EpoMaker
@@ -24,7 +25,7 @@ namespace EpoMaker
             SaveFileDialog excelFile = new SaveFileDialog
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                Filter = "Excel Workbook (*.xlsx)|*.xlsx"
+                Filter = langDE.FILEDIALOG_FileTypeName_ExcelFile+" (*.xlsx)|*.xlsx"
             };
             excelFile.ShowDialog();
             this.spreadsheetDocument = SpreadsheetDocument.Create(excelFile.FileName, SpreadsheetDocumentType.Workbook);
@@ -44,7 +45,7 @@ namespace EpoMaker
             {
                 Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
                 SheetId = 1,
-                Name = "5a"
+                Name = langDE.TABLE_SheetName
             };
             sheets.Append(sheet);
 

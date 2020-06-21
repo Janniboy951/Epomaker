@@ -21,6 +21,7 @@ namespace EpoMaker
     /// <summary>
     /// Interaktionslogik für EditUsers.xaml
     /// </summary>
+    
     public partial class EditUsers : Window
     {
         private readonly SQLiteCommand sqlite;
@@ -30,7 +31,6 @@ namespace EpoMaker
         {
             this.course = course;
             InitializeComponent();
-            this.Closed += ClosedWindow;
             
             CollectionViewSource itemCollectionViewSource;
             itemCollectionViewSource = (CollectionViewSource)(FindResource("ItemCollectionViewSource"));
@@ -49,18 +49,14 @@ namespace EpoMaker
                 personList.Add(new Person { ID = reader.GetInt32(0), PreName = reader.GetString(1), LastName = reader.GetString(2) });
             }
         }
-        private void ClosedWindow(object sender, EventArgs e)
-        {
-            //((MainWindow)Application.Current.MainWindow).Show();
-            
-        }
+
         private void BTNSave_Click(object sender, RoutedEventArgs e)
         {
             sqlite.CommandText = string.Format(SQL_Statements.Clear_CourseMembers,course);
             sqlite.ExecuteNonQuery();
             foreach (Person person in personList)
             {
-                sqlite.CommandText = string.Format(SQL_Statements.Clear_CourseMembers, course, person.ID, person.PreName, person.LastName);
+                sqlite.CommandText = string.Format(SQL_Statements.Insert_Users_To_Course, course, person.PreName, person.LastName);
                 sqlite.ExecuteNonQuery();
             }
             this.Close();
@@ -70,11 +66,12 @@ namespace EpoMaker
         {
             this.Close();
         }
-        
+
+
     }
     public class Person
     {
-        public int ID { get; set; }
+        public int ID { get ; set; }
         public string PreName { get; set; }
         public string LastName { get; set; }
     }

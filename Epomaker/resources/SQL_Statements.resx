@@ -126,7 +126,7 @@
     <comment>{0} = {course}</comment>
   </data>
   <data name="Create_Course_Table" xml:space="preserve">
-    <value>CREATE TABLE '{0}' ('schuelerID'INTEGER,'Vorname'TEXT,'Nachname'TEXT,PRIMARY KEY('schuelerID'));</value>
+    <value>CREATE TABLE '{0}' ('schuelerID'INTEGER,'Vorname'TEXT,'Nachname'TEXT,PRIMARY KEY('schuelerID','schuelerID' AUTOINCREMENT);</value>
     <comment>{0} = {course}</comment>
   </data>
   <data name="Create_TableList_Table" xml:space="preserve">
@@ -162,8 +162,8 @@
     <comment>{0} = {course}</comment>
   </data>
   <data name="Insert_Users_To_Course" xml:space="preserve">
-    <value>INSERT INTO '{0}'(schuelerID,Vorname,Nachname) VALUES ({1},'{2}','{3}');</value>
-    <comment>{0} = {course}, {1} = {id}, {2} = {preName}, {3} = {lastName}</comment>
+    <value>INSERT INTO '{0}'(Vorname,Nachname) VALUES ({1},'{2}');</value>
+    <comment>{0} = {course},  {1} = {preName}, {2} = {lastName}</comment>
   </data>
   <data name="Rename_Course" xml:space="preserve">
     <value>ALTER TABLE '{0}' RENAME TO ''{1}'; 

@@ -72,7 +72,7 @@ namespace EpoMaker
                 }
                 else
                 {
-                    MessageBox.Show("Der Kurs " + ((TextBox)sender).Text + " existiert bereits!", langDE.WindowTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(string.Format(langDE.MESSAGE_CourseAlreadyExists, ((TextBox)sender).Text), langDE.WindowTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                     BTNCourse.Content = oldTableName;
                 }
             }

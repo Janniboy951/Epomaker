@@ -21,7 +21,7 @@ namespace EpoMaker
             MENU_File_Close_Click(null, null);
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                Filter = "Epomaker Datei (*.epmf)|*.epmf",
+                Filter = langDE.FILEDIALOG_FileTypeName_EpoMakerFile + " (*.epmf)|*.epmf",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
             if (saveFileDialog.ShowDialog() == true)
@@ -62,7 +62,7 @@ namespace EpoMaker
             MENU_File_Close_Click(null, null);
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "Epomaker Datei (*.epmf)|*.epmf",
+                Filter = langDE.FILEDIALOG_FileTypeName_EpoMakerFile + " (*.epmf)|*.epmf",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
             if (openFileDialog.ShowDialog() == true)
@@ -86,7 +86,7 @@ namespace EpoMaker
         //**********************************Course Menu********************************************************
         private void MENU_Course_New_Click(object sender, RoutedEventArgs e)
         {
-            string newCourseName = new InputBox("Namen des neuen Kurs eingeben:").ShowDialog();
+            string newCourseName = new InputBox(langDE.MESSAGE_EnterCourseName).ShowDialog();
             if (newCourseName != "")
             {
 
@@ -104,7 +104,7 @@ namespace EpoMaker
                 }
                 else
                 {
-                    MessageBox.Show("Kurs existiert bereits!", "EpoMaker", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show(string.Format(langDE.MESSAGE_CourseAlreadyExists, newCourseName), langDE.WindowTitle, MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     
                 }
             }
@@ -121,8 +121,8 @@ namespace EpoMaker
             SQLiteDataReader reader= _command.ExecuteReader();
             List<string> headerRow = new List<string>
             {
-                "Nachname",
-                "Vorname"
+                langDE.TABLE_Cellheader_Surname,
+                langDE.TABLE_Cellheader_Forename
             };
             while (reader.Read())
             {

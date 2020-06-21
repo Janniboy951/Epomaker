@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FILEDIALOG_FileTypeName_EpoMakerFile" xml:space="preserve">
+    <value>Eponoten Datei</value>
+  </data>
+  <data name="FILEDIALOG_FileTypeName_ExcelFile" xml:space="preserve">
+    <value>Excel Workbook</value>
+  </data>
   <data name="MENU_Close" xml:space="preserve">
     <value>Schließen</value>
   </data>
   <data name="MENU_Course" xml:space="preserve">
     <value>Kurse</value>
+  </data>
+  <data name="MENU_Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="MENU_EditUsers" xml:space="preserve">
+    <value>Mitglieder bearbeiten</value>
   </data>
   <data name="MENU_Export" xml:space="preserve">
     <value>Exportieren</value>
@@ -135,8 +147,66 @@
   <data name="MENU_Open" xml:space="preserve">
     <value>Öffnen</value>
   </data>
+  <data name="MENU_Rename" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
   <data name="MENU_Save" xml:space="preserve">
     <value>Speichern</value>
+  </data>
+  <data name="MESSAGE_CourseAlreadyExists" xml:space="preserve">
+    <value>Der Kurs "{0}"existiert bereits!</value>
+    <comment>{0} = {course}</comment>
+  </data>
+  <data name="MESSAGE_EnterCourseName" xml:space="preserve">
+    <value>Namen des neuen Kurs eingeben:</value>
+  </data>
+  <data name="MESSAGE_PleaseAddMembers" xml:space="preserve">
+    <value>Bitte füge erst ein Paar Mitglieder hinzu!</value>
+  </data>
+  <data name="MESSAGE_QuestionWantToContinue" xml:space="preserve">
+    <value>Möchtest du da weitermachen wo du aufgehört hast?</value>
+  </data>
+  <data name="SETGRADE_Button_Absent" xml:space="preserve">
+    <value>Abwesend</value>
+  </data>
+  <data name="SETGRADE_Button_Cancel" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="SETGRADE_Button_SaveNext" xml:space="preserve">
+    <value>Speichern und Weiter</value>
+  </data>
+  <data name="SETGRADE_Button_Skip" xml:space="preserve">
+    <value>Überspringen</value>
+  </data>
+  <data name="SETGRADE_Option_DoubleLesson" xml:space="preserve">
+    <value>Doppelstunde</value>
+  </data>
+  <data name="SETGRADE_Option_SingleLesson" xml:space="preserve">
+    <value>Einzelstunde</value>
+  </data>
+  <data name="SETGRADE_Slide_Option_Adequate" xml:space="preserve">
+    <value>Schlecht</value>
+  </data>
+  <data name="SETGRADE_Slide_Option_Fail" xml:space="preserve">
+    <value>Sehr Schlecht</value>
+  </data>
+  <data name="SETGRADE_Slide_Option_Good" xml:space="preserve">
+    <value>Gut</value>
+  </data>
+  <data name="SETGRADE_Slide_Option_Satisfactory" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="SETGRADE_Slide_Option_VeryGood" xml:space="preserve">
+    <value>Sehr gut</value>
+  </data>
+  <data name="TABLE_Cellheader_Forename" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="TABLE_Cellheader_Surname" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="TABLE_SheetName" xml:space="preserve">
+    <value>Tabelle1</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>Eponoten Programm</value>

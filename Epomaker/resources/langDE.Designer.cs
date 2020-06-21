@@ -61,6 +61,24 @@ namespace EpoMaker.resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Eponoten Datei ähnelt.
+        /// </summary>
+        public static string FILEDIALOG_FileTypeName_EpoMakerFile {
+            get {
+                return ResourceManager.GetString("FILEDIALOG_FileTypeName_EpoMakerFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Excel Workbook ähnelt.
+        /// </summary>
+        public static string FILEDIALOG_FileTypeName_ExcelFile {
+            get {
+                return ResourceManager.GetString("FILEDIALOG_FileTypeName_ExcelFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Schließen ähnelt.
         /// </summary>
         public static string MENU_Close {
@@ -75,6 +93,24 @@ namespace EpoMaker.resources {
         public static string MENU_Course {
             get {
                 return ResourceManager.GetString("MENU_Course", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Löschen ähnelt.
+        /// </summary>
+        public static string MENU_Delete {
+            get {
+                return ResourceManager.GetString("MENU_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mitglieder bearbeiten ähnelt.
+        /// </summary>
+        public static string MENU_EditUsers {
+            get {
+                return ResourceManager.GetString("MENU_EditUsers", resourceCulture);
             }
         }
         
@@ -115,11 +151,182 @@ namespace EpoMaker.resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Umbenennen ähnelt.
+        /// </summary>
+        public static string MENU_Rename {
+            get {
+                return ResourceManager.GetString("MENU_Rename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Speichern ähnelt.
         /// </summary>
         public static string MENU_Save {
             get {
                 return ResourceManager.GetString("MENU_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Der Kurs &quot;{0}&quot;existiert bereits! ähnelt.
+        /// </summary>
+        public static string MESSAGE_CourseAlreadyExists {
+            get {
+                return ResourceManager.GetString("MESSAGE_CourseAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Namen des neuen Kurs eingeben: ähnelt.
+        /// </summary>
+        public static string MESSAGE_EnterCourseName {
+            get {
+                return ResourceManager.GetString("MESSAGE_EnterCourseName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bitte füge erst ein Paar Mitglieder hinzu! ähnelt.
+        /// </summary>
+        public static string MESSAGE_PleaseAddMembers {
+            get {
+                return ResourceManager.GetString("MESSAGE_PleaseAddMembers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Möchtest du da weitermachen wo du aufgehört hast? ähnelt.
+        /// </summary>
+        public static string MESSAGE_QuestionWantToContinue {
+            get {
+                return ResourceManager.GetString("MESSAGE_QuestionWantToContinue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Abwesend ähnelt.
+        /// </summary>
+        public static string SETGRADE_Button_Absent {
+            get {
+                return ResourceManager.GetString("SETGRADE_Button_Absent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Zurück ähnelt.
+        /// </summary>
+        public static string SETGRADE_Button_Cancel {
+            get {
+                return ResourceManager.GetString("SETGRADE_Button_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Speichern und Weiter ähnelt.
+        /// </summary>
+        public static string SETGRADE_Button_SaveNext {
+            get {
+                return ResourceManager.GetString("SETGRADE_Button_SaveNext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Überspringen ähnelt.
+        /// </summary>
+        public static string SETGRADE_Button_Skip {
+            get {
+                return ResourceManager.GetString("SETGRADE_Button_Skip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Doppelstunde ähnelt.
+        /// </summary>
+        public static string SETGRADE_Option_DoubleLesson {
+            get {
+                return ResourceManager.GetString("SETGRADE_Option_DoubleLesson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Einzelstunde ähnelt.
+        /// </summary>
+        public static string SETGRADE_Option_SingleLesson {
+            get {
+                return ResourceManager.GetString("SETGRADE_Option_SingleLesson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Schlecht ähnelt.
+        /// </summary>
+        public static string SETGRADE_Slide_Option_Adequate {
+            get {
+                return ResourceManager.GetString("SETGRADE_Slide_Option_Adequate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sehr Schlecht ähnelt.
+        /// </summary>
+        public static string SETGRADE_Slide_Option_Fail {
+            get {
+                return ResourceManager.GetString("SETGRADE_Slide_Option_Fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Gut ähnelt.
+        /// </summary>
+        public static string SETGRADE_Slide_Option_Good {
+            get {
+                return ResourceManager.GetString("SETGRADE_Slide_Option_Good", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Okay ähnelt.
+        /// </summary>
+        public static string SETGRADE_Slide_Option_Satisfactory {
+            get {
+                return ResourceManager.GetString("SETGRADE_Slide_Option_Satisfactory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sehr gut ähnelt.
+        /// </summary>
+        public static string SETGRADE_Slide_Option_VeryGood {
+            get {
+                return ResourceManager.GetString("SETGRADE_Slide_Option_VeryGood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Vorname ähnelt.
+        /// </summary>
+        public static string TABLE_Cellheader_Forename {
+            get {
+                return ResourceManager.GetString("TABLE_Cellheader_Forename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Nachname ähnelt.
+        /// </summary>
+        public static string TABLE_Cellheader_Surname {
+            get {
+                return ResourceManager.GetString("TABLE_Cellheader_Surname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tabelle1 ähnelt.
+        /// </summary>
+        public static string TABLE_SheetName {
+            get {
+                return ResourceManager.GetString("TABLE_SheetName", resourceCulture);
             }
         }
         

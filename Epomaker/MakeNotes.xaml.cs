@@ -61,7 +61,7 @@ namespace EpoMaker
             reader.Close();
             if (courseMembers.Count == 0)
             {
-                MessageBox.Show("Bitte füge erst ein Paar Mitglieder hinzu!", langDE.WindowTitle, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show(langDE.MESSAGE_PleaseAddMembers, langDE.WindowTitle, MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 successfullyLoaded = false;
                 return;
                 
@@ -79,7 +79,7 @@ namespace EpoMaker
             reader.Close();
             if (dbPos != 0)
             {
-                MessageBoxResult boxResult= MessageBox.Show("Möchtest du da weitermachen wo du aufgehört hast?", langDE.WindowTitle, MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult boxResult= MessageBox.Show(langDE.MESSAGE_QuestionWantToContinue, langDE.WindowTitle, MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (boxResult == MessageBoxResult.Yes)
                 {
                     currentMember = dbPos;

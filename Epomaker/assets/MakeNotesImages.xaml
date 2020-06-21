@@ -1,32 +1,29 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:resx="clr-namespace:EpoMaker.resources">
     <StackPanel x:Key="missing" Orientation="Vertical" >
         <Image Source="questionmark.png" Stretch="None" MaxHeight="105"/>
-        <Label Content="Nicht anwesend" HorizontalAlignment="Center"/>
+        <Label Content="{x:Static resx:langDE.SETGRADE_Button_Absent}" HorizontalAlignment="Center"/>
     </StackPanel>
     <StackPanel x:Key="veryBad" Orientation="Vertical">
         <Image Source="veryangrySmiley.png"/>
-        <Label Content="Sehr schlecht" HorizontalAlignment="Center"/>
+        <Label Content="{x:Static resx:langDE.SETGRADE_Slide_Option_Fail}" HorizontalAlignment="Center"/>
     </StackPanel>
     <StackPanel x:Key="bad" Orientation="Vertical">
         <Image Source="angrySmiley.png"/>
-        <Label Content="Schlecht" HorizontalAlignment="Center"/>
+        <Label Content="{x:Static resx:langDE.SETGRADE_Slide_Option_Adequate}" HorizontalAlignment="Center"/>
     </StackPanel>
     <StackPanel x:Key="neutral" Orientation="Vertical">
         <Image Source="neutralSmiley.png"/>
-        <Label Content="Okay" HorizontalAlignment="Center"/>
+        <Label Content="{x:Static resx:langDE.SETGRADE_Slide_Option_Satisfactory}" HorizontalAlignment="Center"/>
     </StackPanel>
     <StackPanel x:Key="good" Orientation="Vertical">
         <Image Source="happySmiley.png"/>
-        <Label Content="Gut" HorizontalAlignment="Center"/>
+        <Label Content="{x:Static resx:langDE.SETGRADE_Slide_Option_Good}" HorizontalAlignment="Center"/>
     </StackPanel>
     <StackPanel x:Key="veryGood" Orientation="Vertical">
         <Image Source="veryhappySmiley.png"/>
-        <Label Content="Sehr gut" HorizontalAlignment="Center"/>
+        <Label Content="{x:Static resx:langDE.SETGRADE_Slide_Option_VeryGood}" HorizontalAlignment="Center"/>
     </StackPanel>
-    
-    
-    
-    
-    
+
 </ResourceDictionary>

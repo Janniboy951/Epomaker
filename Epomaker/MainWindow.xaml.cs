@@ -26,11 +26,11 @@ namespace EpoMaker
             MENU_File_Save.IsEnabled = value;
             if (value)
             {
-                _command.CommandText = string.Format(SQL_Statements.Get_All, "TableList");
+                _command.CommandText = string.Format(SQL_Statements.Get_All, @"TableList");
                 SQLiteDataReader reader = _command.ExecuteReader();
                 while (reader.Read())
                 {
-                    courses.Add($"{reader.GetString(0)}");
+                    courses.Add(reader.GetString(0));
                 }
                 reader.Close();
             }
@@ -39,7 +39,7 @@ namespace EpoMaker
         {
             InitializeComponent();
             MENU_Course_Export.IsEnabled = false;
-            Console.WriteLine(MainGrid.RowDefinitions.Count);
+            
         }
         private void UpdateCourseBTNs()
         {

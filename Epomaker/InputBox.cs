@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EpoMaker.resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace EpoMaker
         readonly FontFamily font = new FontFamily("Arial");//font for the whole inputbox
         readonly int FontSize = 14;//fontsize for the input
         readonly StackPanel sp1 = new StackPanel();// items container
-        readonly string title = "EpoMaker";//title as heading
+        readonly string title = langDE.WindowTitle;//title as heading
         readonly string boxcontent;//title
         readonly string defaulttext = "";//default textbox content
         readonly string errormessage = "Fehler";//error messagebox content
