@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EpoMaker"
+        xmlns:resx="clr-namespace:EpoMaker.resources"
         mc:Ignorable="d"
-        Title="Eponoten Maker" Height="450" Width="800">
+        Title="{x:Static resx:langDE.WindowTitle}" Height="450" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,14 +26,15 @@
             <ColumnDefinition Width="15"/>
         </Grid.ColumnDefinitions>
         <Menu Grid.ColumnSpan="7" Background="LightGray">
-            <MenuItem Header="_Datei">
-                <MenuItem Header="_Neu" x:Name="MENU_New" Click="MENU_New_Click"/>
-                <MenuItem Header="_Öffnen" x:Name="MENU_Open" Click="MENU_Open_Click"/>
-                <MenuItem Header="_Speichern" x:Name="MENU_Save" IsEnabled="False" Click="MENU_Save_Click" Icon="{DynamicResource MENU_Save}"/>
-                <MenuItem Header="_Schließen" x:Name="MENU_Close" IsEnabled="False" Click="MENU_Close_Click"/>
+            <MenuItem Header="{x:Static resx:langDE.MENU_File}" Name="MENU_File">
+                <MenuItem Header="{x:Static resx:langDE.MENU_New}" x:Name="MENU_File_New" Click="MENU_File_New_Click"/>
+                <MenuItem Header="{x:Static resx:langDE.MENU_Open}" x:Name="MENU_File_Open" Click="MENU_File_Open_Click"/>
+                <MenuItem Header="{x:Static resx:langDE.MENU_Save}" x:Name="MENU_File_Save" IsEnabled="False" Click="MENU_File_Save_Click" Icon="{DynamicResource MENU_Save}"/>
+                <MenuItem Header="{x:Static resx:langDE.MENU_Close}" x:Name="MENU_File_Close" IsEnabled="False" Click="MENU_File_Close_Click"/>
             </MenuItem>
-            <MenuItem Header="_Kurse" Name="MENU_Course" IsEnabled="False">
-                <MenuItem Header="_Neu" x:Name="MENU_Course_New" Click="MENU_Course_New_Click"/>
+            <MenuItem Header="{x:Static resx:langDE.MENU_Course}" Name="MENU_Course" IsEnabled="False">
+                <MenuItem Header="{x:Static resx:langDE.MENU_New}" x:Name="MENU_Course_New" Click="MENU_Course_New_Click"/>
+                <MenuItem Header="{x:Static resx:langDE.MENU_Export}" x:Name="MENU_Course_Export" Click="MENU_Course_Export_Click"/>
             </MenuItem>
         </Menu>
         

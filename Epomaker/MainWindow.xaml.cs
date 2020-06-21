@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EpoMaker.resources;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure.DependencyResolution;
 using System.Data.SQLite;
@@ -13,33 +14,31 @@ namespace EpoMaker
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public SQLiteCommand _command;
         public SQLiteConnection _connection;
         public List<string> courses = new List<string>();
-        bool FileLoaded
+        private string openedCourse;
+        private void SetFileLoaded(bool value)
         {
-            get { return _fileLoaded; }
-            set
+            MENU_Course.IsEnabled = value;
+            MENU_File_Close.IsEnabled = value;
+            MENU_File_Save.IsEnabled = value;
+            if (value)
             {
-                _fileLoaded = value;
-                MENU_Course.IsEnabled = value;
-                MENU_Close.IsEnabled = value;
-                MENU_Save.IsEnabled = value;
-                if (value)
+                _command.CommandText = string.Format(SQL_Statements.Get_All, "TableList");
+                SQLiteDataReader reader = _command.ExecuteReader();
+                while (reader.Read())
                 {
-                    _command.CommandText = @"SELECT * FROM TableList";
-                    SQLiteDataReader reader= _command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        courses.Add($"{reader.GetString(0)}");
-                    }
+                    courses.Add($"{reader.GetString(0)}");
                 }
+                reader.Close();
             }
         }
-        private bool _fileLoaded = false;
         public MainWindow()
         {
             InitializeComponent();
+            MENU_Course_Export.IsEnabled = false;
             Console.WriteLine(MainGrid.RowDefinitions.Count);
         }
         private void UpdateCourseBTNs()
@@ -134,6 +133,8 @@ namespace EpoMaker
                 MainGrid.Children.Add(makeNotesUC);
                 Grid.SetColumn(makeNotesUC, 1);
                 Grid.SetRow(makeNotesUC, 2);
+                this.openedCourse = course;
+                MENU_Course_Export.IsEnabled = true;
             }
             else
             {
@@ -149,6 +150,9 @@ namespace EpoMaker
                 Height = new GridLength(1, GridUnitType.Star)
             });
             UpdateCourseBTNs();
+            MENU_Course_Export.IsEnabled = false;
         }
+
+
     }
 }

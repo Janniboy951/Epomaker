@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EpoMaker.resources;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.SQLite;
@@ -65,15 +66,13 @@ namespace EpoMaker
                     BTNCourse.Content = ((TextBox)sender).Text;
                     SQLiteCommand sqlCommand = new SQLiteCommand(((MainWindow)Application.Current.MainWindow)._connection)
                     {
-                        CommandText = @"ALTER TABLE '" + oldTableName + "' RENAME TO '" + ((TextBox)sender).Text + "'"
+                        CommandText = string.Format(SQL_Statements.Rename_Course,oldTableName, ((TextBox)sender).Text)
                     };
-                    sqlCommand.ExecuteNonQuery();
-                    sqlCommand.CommandText = "UPDATE TableList SET Name = '" + ((TextBox)sender).Text + "' WHERE Name = '" + oldTableName + "' ";
                     sqlCommand.ExecuteNonQuery();
                 }
                 else
                 {
-                    MessageBox.Show("Der Kurs " + ((TextBox)sender).Text + " existiert bereits!", "Eponoten Maker", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Der Kurs " + ((TextBox)sender).Text + " existiert bereits!", langDE.WindowTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                     BTNCourse.Content = oldTableName;
                 }
             }
@@ -90,6 +89,7 @@ namespace EpoMaker
         private void BTNCourse_Click(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow).OpenCourse((string)BTNCourse.Content);
+
         }
     }
 }

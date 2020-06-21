@@ -53,7 +53,7 @@
                 <RadioButton x:Name="SingleHour" Content="Einzelstunde" IsChecked="{Binding Path=!IsDoublehour}" VerticalAlignment="Center" Margin="0 2"/>
                 <RadioButton x:Name="DoubleHour" Content="Doppelstunde" IsChecked="{Binding Path=IsDoublehour}" VerticalAlignment="Center" Margin="0 2"/>
             </StackPanel>
-            <Button Margin="20,3,10,3" Width="140" Content="Abbrechen" x:Name="BTNCancel" Click="BTNCancel_Click"/>
+            <Button Margin="20,3,10,3" Width="140" Content="Zurück" x:Name="BTNCancel" Click="BTNCancel_Click"/>
             <Button Margin="10,3" Width="140" Content="Überspringen" x:Name="BTNSKip" Click="BTNSKip_Click"/>
             <Button Margin="10,3,0,3" Width="140" Content="Speichern und Weiter" x:Name="BTNSaveNext" Click="BTNSaveNext_Click"/>
             

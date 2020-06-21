@@ -117,7 +117,66 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="String1" xml:space="preserve">
-    <value>test</value>
+  <data name="Clear_CourseMembers" xml:space="preserve">
+    <value>DELETE FROM '{0}';</value>
+    <comment>{0} = {course}</comment>
+  </data>
+  <data name="Create_Course-Data_Table" xml:space="preserve">
+    <value>CREATE TABLE '{0}-Data' ('schuelerID'INTEGER,'Note'	REAL,'Stunde'date,'Fehlt'BOOLEAN,'Doppelstunde'BOOLEAN,FOREIGN KEY('schuelerID') REFERENCES '{0}'('schuelerID'));</value>
+    <comment>{0} = {course}</comment>
+  </data>
+  <data name="Create_Course_Table" xml:space="preserve">
+    <value>CREATE TABLE '{0}' ('schuelerID'INTEGER,'Vorname'TEXT,'Nachname'TEXT,PRIMARY KEY('schuelerID'));</value>
+    <comment>{0} = {course}</comment>
+  </data>
+  <data name="Create_TableList_Table" xml:space="preserve">
+    <value>CREATE TABLE 'TableList' ('Name'TEXT,'CurrentPos'INTEGER,PRIMARY KEY('Name'));</value>
+    <comment>No Placeholder</comment>
+  </data>
+  <data name="Get_All" xml:space="preserve">
+    <value>SELECT * FROM '{0}';</value>
+    <comment>{0} = {course}</comment>
+  </data>
+  <data name="Get_All_Lessons" xml:space="preserve">
+    <value>SELECT DISTINCT Stunde From '{0}-Data' ORDER By Stunde ASC;</value>
+    <comment>{0} = {course}</comment>
+  </data>
+  <data name="Get_All_Student_Grades" xml:space="preserve">
+    <value>SELECT Stunde,Note From '{0}-Data' WHERE schuelerID={1} AND Fehlt='False' ORDER By Stunde ASC;</value>
+    <comment>{0} = {course}, {1} = {id}</comment>
+  </data>
+  <data name="Get_Course_Persons" xml:space="preserve">
+    <value>SELECT Nachname,Vorname,schuelerID From '{0}';</value>
+    <comment>{0} = {course}</comment>
+  </data>
+  <data name="Get_CurrentPos" xml:space="preserve">
+    <value>SELECT CurrentPos FROM TableList WHERE Name='{0}';</value>
+    <comment>{0} = {course}</comment>
+  </data>
+  <data name="Get_Single_Student_Grade_Average" xml:space="preserve">
+    <value>SELECT SUM(CASE WHEN Doppelstunde='True' THEN Note*2 ELSE Note END)/(SUM(Case WHEN Doppelstunde='True' THEN 1 ELSE 0 END)+count(Note)) as Durchschnitt FROM '{0}-Data' Where schuelerId={1} AND Fehlt='False';</value>
+    <comment>{0} = {course}, {1} = {id}</comment>
+  </data>
+  <data name="Insert_Course_To_TableList" xml:space="preserve">
+    <value>Insert INTO TableList (Name) Values ('{0}');</value>
+    <comment>{0} = {course}</comment>
+  </data>
+  <data name="Insert_Users_To_Course" xml:space="preserve">
+    <value>INSERT INTO '{0}'(schuelerID,Vorname,Nachname) VALUES ({1},'{2}','{3}');</value>
+    <comment>{0} = {course}, {1} = {id}, {2} = {preName}, {3} = {lastName}</comment>
+  </data>
+  <data name="Rename_Course" xml:space="preserve">
+    <value>ALTER TABLE '{0}' RENAME TO ''{1}'; 
+ALTER TABLE ''{0}-Data' RENAME TO ''{1}-Data'; 
+UPDATE TableList SET Name=''{1}' WHERE Name=''{0}';</value>
+    <comment>{0} = {oldCourse}, {1} = {newCourse}</comment>
+  </data>
+  <data name="Set_CurrentPos" xml:space="preserve">
+    <value>UPDATE 'TableList' SET CurrentPos={1} WHERE Name='{0}';</value>
+    <comment>{0} = {course}, {1} = {value}</comment>
+  </data>
+  <data name="Set_Note_Data" xml:space="preserve">
+    <value>INSERT INTO '{0}-Data'('schuelerID','Note','Stunde','Fehlt','Doppelstunde') VALUES ({1},'{2}','{3}','{4}','{5}');</value>
+    <comment>{0} = {course}, {1} = {id}, {2} = {grade}, {3} = {date}, {4} = {missing}, {5} = {doubleHour}</comment>
   </data>
 </root>

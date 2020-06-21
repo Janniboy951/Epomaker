@@ -1,5 +1,7 @@
-﻿using Microsoft.Win32;
+﻿using EpoMaker.resources;
+using Microsoft.Win32;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
@@ -13,9 +15,10 @@ namespace EpoMaker
 {
     partial class MainWindow
     {
-        private void MENU_New_Click(object sender, RoutedEventArgs e)
+        //**********************************File Menu**********************************************************
+        private void MENU_File_New_Click(object sender, RoutedEventArgs e)
         {
-            MENU_Close_Click(null, null);
+            MENU_File_Close_Click(null, null);
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "Epomaker Datei (*.epmf)|*.epmf",
@@ -28,16 +31,17 @@ namespace EpoMaker
                 _connection = sqLiteConnection;
                 _command = new SQLiteCommand(sqLiteConnection)
                 {
-                    CommandText = @"CREATE TABLE 'TableList' ('Name'TEXT,'CurrentPos'INTEGER,PRIMARY KEY('Name'));"
+                    
+                    CommandText = SQL_Statements.Create_TableList_Table
                 };
                 _command.ExecuteNonQuery();
-                FileLoaded = true;
-                this.Title = "Eponoten Maker - "+Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
+                SetFileLoaded(true);
+                this.Title = langDE.WindowTitle + " - " + Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
                 UpdateCourseBTNs();
             }
         }
 
-        private void MENU_Close_Click(object sender, RoutedEventArgs e)
+        private void MENU_File_Close_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -49,13 +53,13 @@ namespace EpoMaker
             }
             courses.Clear();
             ResetInnerGrid(MainGrid);
-            FileLoaded = false;
-            this.Title = "Eponoten Maker";
+            SetFileLoaded(false);
+            this.Title = langDE.WindowTitle;
         }
 
-        private void MENU_Open_Click(object sender, RoutedEventArgs e)
+        private void MENU_File_Open_Click(object sender, RoutedEventArgs e)
         {
-            MENU_Close_Click(null, null);
+            MENU_File_Close_Click(null, null);
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Epomaker Datei (*.epmf)|*.epmf",
@@ -68,13 +72,13 @@ namespace EpoMaker
                 sqLiteConnection.Open();
                 _command = new SQLiteCommand(sqLiteConnection);
                 _connection = sqLiteConnection;
-                FileLoaded = true;
-                this.Title = "Eponoten Maker - " + Path.GetFileNameWithoutExtension(openFileDialog.FileName);
+                SetFileLoaded(true);
+                this.Title = langDE.WindowTitle+" - " + Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 UpdateCourseBTNs();
             }
         }
 
-        private void MENU_Save_Click(object sender, RoutedEventArgs e)
+        private void MENU_File_Save_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -82,20 +86,20 @@ namespace EpoMaker
         //**********************************Course Menu********************************************************
         private void MENU_Course_New_Click(object sender, RoutedEventArgs e)
         {
-            string newCoursName = new InputBox("Namen des neuen Kurs eingeben:").ShowDialog();
-            if (newCoursName != "")
+            string newCourseName = new InputBox("Namen des neuen Kurs eingeben:").ShowDialog();
+            if (newCourseName != "")
             {
 
 
-                if (!courses.Contains(newCoursName))
+                if (!courses.Contains(newCourseName))
                 {
-                    _command.CommandText = @"CREATE TABLE '" + newCoursName + @"' ('schuelerID'INTEGER,'Vorname'TEXT,'Nachname'TEXT,PRIMARY KEY('schuelerID'))";
+                    _command.CommandText = string.Format(SQL_Statements.Create_Course_Table,newCourseName);
                     _command.ExecuteNonQuery();
-                    _command.CommandText = @"Insert INTO TableList (Name) Values ('"+newCoursName+"')";
+                    _command.CommandText = string.Format(SQL_Statements.Insert_Course_To_TableList, newCourseName);
                     _command.ExecuteNonQuery();
-                    _command.CommandText = @"CREATE TABLE '"+newCoursName+"-Data' ('schelerId'	INTEGER,'Note'	REAL,'Stunde'	date,'Fehlt'	BOOLEAN,'Doppelstunde'	BOOLEAN,FOREIGN KEY('schelerId') REFERENCES '5a'('schuelerID'));";
+                    _command.CommandText = string.Format(SQL_Statements.Create_Course_Data_Table, newCourseName);
                     _command.ExecuteNonQuery();
-                    courses.Add(newCoursName);
+                    courses.Add(newCourseName);
                     UpdateCourseBTNs();
                 }
                 else
@@ -105,6 +109,67 @@ namespace EpoMaker
                 }
             }
         }
-        
+
+        private void MENU_Course_Export_Click(object sender, RoutedEventArgs e)
+        {
+            ArrayList arrayList = new ArrayList();
+            
+
+            //Defines Header Row
+
+            _command.CommandText = string.Format(SQL_Statements.Get_All_Lessons, openedCourse);
+            SQLiteDataReader reader= _command.ExecuteReader();
+            List<string> headerRow = new List<string>
+            {
+                "Nachname",
+                "Vorname"
+            };
+            while (reader.Read())
+            {
+                headerRow.Add(reader.GetString(0));
+            }
+            reader.Close();
+            arrayList.Add(headerRow.ToArray());
+
+            _command.CommandText = string.Format(SQL_Statements.Get_Course_Persons, openedCourse);
+            reader = _command.ExecuteReader();
+            List<Person> persons = new List<Person>();
+            while (reader.Read())
+            {
+                persons.Add(new Person { LastName=reader.GetString(0),PreName=reader.GetString(1),ID=reader.GetInt32(2)});
+            }
+            reader.Close();
+            foreach (Person person in persons)
+            {
+                List<string> notes = new List<string>
+                {
+                    person.LastName,
+                    person.PreName
+                };
+                _command.CommandText = string.Format(SQL_Statements.Get_All_Student_Grades, openedCourse,person.ID);
+                reader = _command.ExecuteReader();
+                while (reader.Read())
+                {
+                    for (int i = 0; i < headerRow.IndexOf(reader.GetString(0))-notes.Count; i++)
+                    {
+                        notes.Add("");
+                    }
+                    notes.Add(Math.Round(reader.GetDouble(1),1).ToString().Replace(",", "."));
+                }
+                reader.Close();
+                for (int i = 0; i < (headerRow.Count+2)-notes.Count; i++)
+                {
+                    notes.Add("");
+                }
+                _command.CommandText = string.Format(SQL_Statements.Get_Single_Student_Grade_Average, openedCourse, person.ID);
+                reader = _command.ExecuteReader();
+                reader.Read();
+                notes.Add(Math.Round(reader.GetDouble(0), 1).ToString().Replace(",", "."));
+                reader.Close();
+                arrayList.Add(notes.ToArray());
+            }
+
+            new ExcelFile(arrayList);
+        }
     }
 }

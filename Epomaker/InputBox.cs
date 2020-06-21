@@ -40,7 +40,7 @@ namespace EpoMaker
             Windowdef();
         }
 
-        public InputBox(string content, string Htitle, string DefaultText)
+        public InputBox(string content, string Htitle)
         {
             try
             {
@@ -54,14 +54,6 @@ namespace EpoMaker
             catch
             {
                 title = "Error!";
-            }
-            try
-            {
-                defaulttext = DefaultText;
-            }
-            catch
-            {
-                DefaultText = "Error!";
             }
             Windowdef();
         }

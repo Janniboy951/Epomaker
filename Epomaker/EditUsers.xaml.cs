@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
+using EpoMaker.resources;
+
 namespace EpoMaker
 {
     /// <summary>
@@ -39,8 +41,8 @@ namespace EpoMaker
             sqlite = new SQLiteCommand(sqlitecon);
             SQLiteCommand sqlite1 = new SQLiteCommand(sqlitecon)
             {
-                CommandText = @"SELECT * From '" + course + "'"
-            };
+                CommandText = string.Format(SQL_Statements.Get_All, course)
+        };
             SQLiteDataReader reader = sqlite1.ExecuteReader();
             while (reader.Read())
             {
@@ -54,11 +56,11 @@ namespace EpoMaker
         }
         private void BTNSave_Click(object sender, RoutedEventArgs e)
         {
-            sqlite.CommandText = @"DELETE FROM '" + course + "'";
+            sqlite.CommandText = string.Format(SQL_Statements.Clear_CourseMembers,course);
             sqlite.ExecuteNonQuery();
             foreach (Person person in personList)
             {
-                sqlite.CommandText = @"INSERT INTO '" + course + "'(schuelerID,Vorname,Nachname) VALUES ("+person.ID+",'"+person.PreName+"','"+person.LastName+"')";
+                sqlite.CommandText = string.Format(SQL_Statements.Clear_CourseMembers, course, person.ID, person.PreName, person.LastName);
                 sqlite.ExecuteNonQuery();
             }
             this.Close();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EpoMaker.resources;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
@@ -32,18 +33,20 @@ namespace EpoMaker
         }
         public bool successfullyLoaded;
         private bool _IsDoublehour=true;
-        private SQLiteConnection connection;
-        private string course;
-        private List<Person> courseMembers = new List<Person>();
+        private readonly SQLiteConnection connection;
+        private readonly string course;
+        private readonly List<Person> courseMembers = new List<Person>();
         private int currentMember = 0;
         public MakeNotes(SQLiteConnection con,string course)
         {
             InitializeComponent();
             DatePickBox.SelectedDate = DateTime.Today;
             this.connection = con;
-            this.course = course; 
-            SQLiteCommand command = new SQLiteCommand(connection);
-            command.CommandText = @"SELECT * FROM '"+course+"'";
+            this.course = course;
+            SQLiteCommand command = new SQLiteCommand(connection)
+            {
+                CommandText = string.Format(SQL_Statements.Get_All, course)
+            };
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -58,13 +61,13 @@ namespace EpoMaker
             reader.Close();
             if (courseMembers.Count == 0)
             {
-                MessageBox.Show("Bitte füge erst ein Paar Mitglieder hinzu!", "Eponoten Maker", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Bitte füge erst ein Paar Mitglieder hinzu!", langDE.WindowTitle, MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 successfullyLoaded = false;
                 return;
                 
             }
 
-            command.CommandText = @"SELECT CurrentPos FROM TableList WHERE Name='"+course+"'";
+            command.CommandText = string.Format(SQL_Statements.Get_CurrentPos, course);
             reader = command.ExecuteReader();
             reader.Read();
             int dbPos = 0;
@@ -76,12 +79,12 @@ namespace EpoMaker
             reader.Close();
             if (dbPos != 0)
             {
-                MessageBoxResult boxResult= MessageBox.Show("Möchtest du da weitermachen wo du aufgehört hast?", "Eponoten Maker", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult boxResult= MessageBox.Show("Möchtest du da weitermachen wo du aufgehört hast?", langDE.WindowTitle, MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (boxResult == MessageBoxResult.Yes)
                 {
                     currentMember = dbPos;
                 }
-                command.CommandText = @"UPDATE 'TableList' SET CurrentPos=0 WHERE Name='" + course + "'";
+                command.CommandText = string.Format(SQL_Statements.Set_CurrentPos, course,0);
                 command.ExecuteNonQuery();
             }
             reader.Close();
@@ -94,8 +97,10 @@ namespace EpoMaker
             ((MainWindow)Application.Current.MainWindow).LoadCourseList();
             if (currentMember < courseMembers.Count)
             {
-                SQLiteCommand command = new SQLiteCommand(connection);
-                command.CommandText = @"UPDATE 'TableList' SET CurrentPos="+currentMember+" WHERE Name='"+course+"'";
+                SQLiteCommand command = new SQLiteCommand(connection)
+                {
+                    CommandText = string.Format(SQL_Statements.Set_CurrentPos, course, currentMember)
+                };
                 command.ExecuteNonQuery();
             }
         }
@@ -130,8 +135,10 @@ namespace EpoMaker
                 SingleHour.Foreground = Brushes.Black;
                 SQLiteCommand command = new SQLiteCommand(connection);
                 int id = courseMembers[currentMember].ID;
-                command.CommandText = @"INSERT INTO '" + course + "-Data'('schelerId','Note','Stunde','Fehlt','Doppelstunde') VALUES ("+id+",'"+ NoteSlider.Value.ToString().Replace(',','.') + "','"+ 
-                    ((DateTime)DatePickBox.SelectedDate).ToString("d")+"','"+ BTNMissing.IsChecked + "','"+ DoubleHour.IsChecked + "');";
+                string note = NoteSlider.Value.ToString().Replace(',', '.');
+                string date = ((DateTime)DatePickBox.SelectedDate).ToString("d");
+                command.CommandText = string.Format(SQL_Statements.Set_Note_Data, course,id,note , date, BTNMissing.IsChecked, DoubleHour.IsChecked);
+                
                 command.ExecuteNonQuery();
                 NoteSlider.Value = 8;
                 hideBorder.Visibility = Visibility.Hidden;
