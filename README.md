@@ -1,7 +1,7 @@
 # Epomaker
 Dies ist ein Programm zum Eponoten Machen
 
-[/releases/latest]
+[Version1.zip](https://github.com/Janniboy951/Epomaker/files/4824132/Version1.zip)
 
 ## TODO
 
